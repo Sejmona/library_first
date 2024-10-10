@@ -16,13 +16,18 @@ Including another URLconf
 """
 from django.urls import path
 from knihovna import views
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.main_page, name='main_page'),
-    path('writers/', views.writers, name='writers'),
-    path('writers/<str:author_name>/', views.author_detail, name='author_detail'),  # Dynamické URL pro spisovatele
-    path('knihy/', views.books, name='books'),
+    path('', views.main, name='main'),  # Hlavní stránka
+    path('writers/', views.writers, name='writers'),  # Sekce Spisovatelé
+    path('writers/<str:name>/', views.writer_detail, name='writer_detail'),  # Detail spisovatele
+    path('writers/<str:name>/<str:book>/', views.writer_book_detail, name='writer_book_detail'),  # Detail knihy od konkrétního autora
+    path('knihy/', views.best_books, name='best_books'),  # Sekce Nejlepší knihy
+    path('books/<int:position>/', views.book_detail, name='book_detail'),  # Detail knihy podle pořadí
 ]
+
+
 
 
